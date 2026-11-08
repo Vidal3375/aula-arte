@@ -1,11 +1,12 @@
 /* Service worker: guarda la app en el dispositivo para que funcione sin conexión.
    IMPORTANTE: cada vez que cambies algo, sube el número de VERSION (v1 → v2…)
    para que los alumnos reciban la versión nueva. */
-const VERSION = "aula-arte-v1";
+const VERSION = "aula-arte-v2";
 const ARCHIVOS = [
   "./", "./index.html", "./estilos.css", "./js/app.js", "./manifest.webmanifest",
   "./icon.svg", "./icon-180.png", "./icon-192.png", "./icon-512.png",
   "./datos/arte-griego.js",
+  "./datos/arte-romano.js",
   "./img/esquemas/ordenes.jpg",
   "./img/esquemas/postura.jpg",
   "./img/esquemas/teatro.jpg",
@@ -24,6 +25,26 @@ const ARCHIVOS = [
   "./img/griego/pergamo-atenea-gea.jpg",
   "./img/griego/venus-milo.jpg",
   "./img/griego/victoria-samotracia.jpg",
+  "./img/esquemas-romano/basilica.jpg",
+  "./img/esquemas-romano/ciudad.jpg",
+  "./img/esquemas-romano/coliseo.jpg",
+  "./img/esquemas-romano/domus.jpg",
+  "./img/esquemas-romano/estilos.jpg",
+  "./img/esquemas-romano/teatro.jpg",
+  "./img/esquemas-romano/templo.jpg",
+  "./img/romano/acueducto-segovia.jpg",
+  "./img/romano/arco-tito.jpg",
+  "./img/romano/augusto-prima-porta.jpg",
+  "./img/romano/basilica-majencio.jpg",
+  "./img/romano/coliseo.jpg",
+  "./img/romano/columna-trajano.jpg",
+  "./img/romano/maison-carree.jpg",
+  "./img/romano/marco-aurelio.jpg",
+  "./img/romano/panteon.jpg",
+  "./img/romano/puente-alcantara.jpg",
+  "./img/romano/relieve-arco-tito.jpg",
+  "./img/romano/relieve-columna-trajano.jpg",
+  "./img/romano/teatro-merida.jpg",
 ];
 
 self.addEventListener("install", (e) => {

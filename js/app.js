@@ -24,7 +24,7 @@
   ];
 
   // Actividades que aparecerán más adelante (solo se muestran como "Próximamente")
-  var PROXIMAS = ["El arte romano"];
+  var PROXIMAS = [];
 
   /* ---------------- Utilidades ---------------- */
   function barajar(lista) {
@@ -98,9 +98,10 @@
       };
     },
     periodoAmplio: function (act, o) {
-      var amplio = o.periodo.indexOf("Clásico") === 0 ? "Clásico" : o.periodo;
+      var basicos = act.periodosBasicos || ["Arcaico", "Clásico", "Helenístico"];
+      var amplio = basicos.filter(function (b) { return o.periodo.indexOf(b) === 0; })[0] || o.periodo;
       return pImagenATexto(act, o, "Etapas", "¿A qué período pertenece esta obra?", amplio,
-        ["Arcaico", "Clásico", "Helenístico"], o.nombre + ": " + o.periodo + ", " + o.fecha + ".", 3);
+        basicos, o.nombre + ": " + o.periodo + ", " + o.fecha + ".", 3);
     },
     periodo: function (act, o) {
       return pImagenATexto(act, o, "Etapas", "¿A qué etapa pertenece esta obra?", o.periodo,
@@ -209,7 +210,8 @@
       '<h2 class="seccion">Actividades</h2><div class="lista">';
     ids.forEach(function (id) {
       var a = ACTIVIDADES[id];
-      var portada = a.obras && a.obras[0] ? imgObra(a, a.obras[0]) : "";
+      var obraPortada = (a.obras || []).filter(function (o) { return o.id === a.portada; })[0] || (a.obras || [])[0];
+      var portada = obraPortada ? imgObra(a, obraPortada) : "";
       html += '<button class="tarjeta actividad" data-ir="#/a/' + esc(id) + '">' +
         (portada ? '<img src="' + esc(portada) + '" alt="">' : "") +
         '<div><h3>' + esc(a.titulo) + '</h3><p>' + esc(a.subtitulo || "") + '</p></div></button>';
@@ -244,7 +246,7 @@
       var rec = leer("record:" + id + ":" + nivel + ":" + m.id, null);
       html += '<button class="tarjeta modo" data-jugar="' + m.id + '">' +
         '<span class="emoji" aria-hidden="true">' + m.emoji + '</span>' +
-        '<span class="txt"><h3>' + esc(m.titulo) + '</h3><p>' + esc(m.desc) + '</p></span>' +
+        '<span class="txt"><h3>' + esc(m.titulo) + '</h3><p>' + esc((act.descModos && act.descModos[m.id]) || m.desc) + '</p></span>' +
         (rec !== null ? '<span class="record">Récord ' + rec + '%</span>' : '') + '</button>';
     });
     html += '</div><h2 class="seccion">Estudiar</h2>' +

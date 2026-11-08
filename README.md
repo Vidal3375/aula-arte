@@ -3,7 +3,7 @@
 App web gratuita para que los alumnos repasen Historia del Arte jugando.
 Funciona en **iPhone, iPad y Android** (y en el ordenador), se puede **añadir a la pantalla de inicio** como una app más y, una vez abierta, **funciona sin conexión**.
 
-**Primera actividad: El arte griego** (temario PAU, Comunitat Valenciana).
+**Actividades: El arte griego y El arte romano** (temario PAU, Comunitat Valenciana).
 
 ---
 
@@ -79,7 +79,7 @@ Después se abre desde su icono, a pantalla completa, y funciona sin internet.
 
 ## Cómo cambiar o añadir preguntas
 
-Todo el contenido está en un solo archivo: **`datos/arte-griego.js`**. No hace falta tocar nada más.
+Todo el contenido de cada actividad está en un solo archivo: **`datos/arte-griego.js`** o **`datos/arte-romano.js`**. No hace falta tocar nada más.
 
 **Desde la web de GitHub (lo más fácil):**
 1. En el repositorio, entra en la carpeta `datos` y abre `arte-griego.js`.
