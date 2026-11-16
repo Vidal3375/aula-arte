@@ -3,7 +3,7 @@
 App web gratuita para que los alumnos repasen Historia del Arte jugando.
 Funciona en **iPhone, iPad y Android** (y en el ordenador), se puede **añadir a la pantalla de inicio** como una app más y, una vez abierta, **funciona sin conexión**.
 
-**Actividades: El arte griego y El arte romano** (temario PAU, Comunitat Valenciana).
+**Actividades: El arte griego, El arte romano y El arte islámico y mudéjar** (temario PAU, Comunitat Valenciana).
 
 ---
 
@@ -79,7 +79,7 @@ Después se abre desde su icono, a pantalla completa, y funciona sin internet.
 
 ## Cómo cambiar o añadir preguntas
 
-Todo el contenido de cada actividad está en un solo archivo: **`datos/arte-griego.js`** o **`datos/arte-romano.js`**. No hace falta tocar nada más.
+Todo el contenido de cada actividad está en un solo archivo: **`datos/arte-griego.js`**, **`datos/arte-romano.js`** o **`datos/arte-islamico.js`**. No hace falta tocar nada más.
 
 **Desde la web de GitHub (lo más fácil):**
 1. En el repositorio, entra en la carpeta `datos` y abre `arte-griego.js`.
@@ -97,6 +97,8 @@ Todo el contenido de cada actividad está en un solo archivo: **`datos/arte-grie
       esquema: "ordenes"
     },
 ```
+
+En `arte-islamico.js` una pregunta también puede llevar `imagen: "planta-cordoba"` (o cualquier otro nombre de su lista `esquemas`): entonces la planta o la foto de detalle aparece **junto a la pregunta**, no solo al corregir. Sirve para preguntas como «¿Qué es el número 7 de esta planta?».
 
 - `tema`: `"estilo"`, `"etapas"` o `"contexto"` (decide en qué juego sale).
 - `nivel`: `"basico"`, `"normal"` o `"extremo"`.
@@ -134,6 +136,8 @@ Abre <http://localhost:8000> en el navegador. Para pararlo, pulsa `Ctrl + C` en 
 | `datos/arte-griego.js` | **Las obras y las preguntas** |
 | `img/griego/` | Fotos de las 14 obras (reducidas para que carguen rápido) |
 | `img/esquemas/` | Esquemas del templo, los órdenes, el teatro y la postura |
+| `datos/arte-romano.js`, `img/romano/`, `img/esquemas-romano/` | Actividad de arte romano |
+| `datos/arte-islamico.js`, `img/islamico/`, `img/esquemas-islamico/` | Actividad de arte islámico y mudéjar: 4 obras PAU + 2 extras, plantas y fotos de detalle |
 | `manifest.webmanifest` | Nombre e icono al instalarla |
 | `sw.js` | Guarda la app en el móvil para usarla sin conexión |
 | `icon*.png`, `icon.svg` | Iconos |

@@ -128,9 +128,15 @@
     }
   };
 
+  function pieEsquema(e) { return e ? e.pie + (e.credito ? " " + e.credito : "") : ""; }
+
   function preguntaTexto(act, q) {
+    // "imagen" (opcional): muestra un esquema o una foto de detalle junto al enunciado
+    var foto = q.imagen && act.esquemas ? act.esquemas[q.imagen] : null;
     return {
-      tipo: "texto",
+      tipo: foto ? "imagen" : "texto",
+      img: foto ? foto.img : null,
+      pieImg: foto ? pieEsquema(foto) : null,
       etiqueta: { estilo: "Rasgos de estilo", etapas: "Etapas", contexto: "Contexto histórico" }[q.tema] || "",
       enunciado: q.texto,
       opciones: barajar([{ texto: q.correcta, ok: true }].concat(q.incorrectas.map(function (t) { return { texto: t, ok: false }; }))),
@@ -308,7 +314,7 @@
         '<h3>' + (bien ? "¡Correcto! 🎉" : "No es correcto") + '</h3>' +
         (bien ? "" : '<p>La respuesta correcta es: <strong>' + esc(q.solucion) + '</strong></p>') +
         '<p>' + esc(q.explicacion) + '</p>' +
-        (q.esquema ? '<img class="esquema" src="' + esc(q.esquema.img) + '" alt="' + esc(q.esquema.pie) + '" data-ampliar="' + esc(q.esquema.img) + '"><p class="pie">' + esc(q.esquema.pie) + '</p>' : '') +
+        (q.esquema ? '<img class="esquema" src="' + esc(q.esquema.img) + '" alt="' + esc(q.esquema.pie) + '" data-ampliar="' + esc(q.esquema.img) + '"><p class="pie">' + esc(pieEsquema(q.esquema)) + '</p>' : '') +
         (q.pieImg ? '<p class="pie">' + esc(q.pieImg) + '</p>' : '') +
         '<button class="boton ancho" data-siguiente>' + (p.i + 1 < p.preguntas.length ? "Siguiente →" : "Ver resultado") + '</button>' +
         '</div>';
@@ -389,6 +395,7 @@
       '<dt>Lugar</dt><dd>' + esc(o.lugar) + '</dd>' +
       '<dt>Rasgo</dt><dd>' + esc(o.rasgo) + '</dd></dl>' +
       '<p class="clave">' + esc(o.clave) + '</p>' +
+      (o.nota ? '<p class="nota-obra">' + esc(o.nota) + '</p>' : '') +
       '<p class="credito">' + esc(creditoObra(o)) + ' · <a href="' + esc(o.foto.url) + '" target="_blank" rel="noopener">ver original</a></p>' +
       '</div></article>' +
       '<div class="ficha-nav"><button class="boton secundario" data-ir="#/a/' + esc(id) + '/fichas/' + esc(ant.id) + '">← Anterior</button>' +
@@ -410,6 +417,17 @@
           ', <a href="' + esc(o.foto.url) + '" target="_blank" rel="noopener">Wikimedia Commons</a>.</li>';
       });
       html += '</ul>';
+      // Esquemas y fotos de detalle que tienen autor (las actividades nuevas lo indican con "credito")
+      var conCredito = Object.keys(a.esquemas || {}).filter(function (k) { return a.esquemas[k].credito; });
+      if (conCredito.length) {
+        html += '<h2 class="seccion">Esquemas y detalles · ' + esc(a.titulo) + '</h2><ul class="creditos">';
+        conCredito.forEach(function (k) {
+          var e = a.esquemas[k];
+          html += '<li><strong>' + esc(e.titulo || e.pie) + '</strong>: ' + esc(e.credito) +
+            (e.url ? ' <a href="' + esc(e.url) + '" target="_blank" rel="noopener">Ver original</a>.' : '') + '</li>';
+        });
+        html += '</ul>';
+      }
     });
     html += '<p>Las licencias CC BY y CC BY-SA permiten usar las fotos citando al autor. Las fotos se han reducido de tamaño para la app.</p></main>';
     return html;
@@ -567,6 +585,7 @@
     Object.keys(ACTIVIDADES).forEach(function (id) {
       var a = ACTIVIDADES[id];
       (a.obras || []).forEach(function (o) { if (imgObra(a, o) === src) pie = creditoObra(o); });
+      Object.keys(a.esquemas || {}).forEach(function (k) { if (a.esquemas[k].img === src && a.esquemas[k].credito) pie = a.esquemas[k].credito; });
     });
     visor.querySelector(".visor-pie").textContent = pie;
     visor.hidden = false;
