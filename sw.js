@@ -1,12 +1,13 @@
 /* Service worker: guarda la app en el dispositivo para que funcione sin conexión.
    IMPORTANTE: cada vez que cambies algo, sube el número de VERSION (v1 → v2…)
    para que los alumnos reciban la versión nueva. */
-const VERSION = "aula-arte-v2";
+const VERSION = "aula-arte-v3";
 const ARCHIVOS = [
   "./", "./index.html", "./estilos.css", "./js/app.js", "./manifest.webmanifest",
   "./icon.svg", "./icon-180.png", "./icon-192.png", "./icon-512.png",
   "./datos/arte-griego.js",
   "./datos/arte-romano.js",
+  "./datos/arte-islamico.js",
   "./img/esquemas/ordenes.jpg",
   "./img/esquemas/postura.jpg",
   "./img/esquemas/teatro.jpg",
@@ -45,6 +46,27 @@ const ARCHIVOS = [
   "./img/romano/relieve-arco-tito.jpg",
   "./img/romano/relieve-columna-trajano.jpg",
   "./img/romano/teatro-merida.jpg",
+  "./img/esquemas-islamico/arco-mixtilineo.jpg",
+  "./img/esquemas-islamico/arcos.jpg",
+  "./img/esquemas-islamico/arrayanes.jpg",
+  "./img/esquemas-islamico/cupula-macsura.jpg",
+  "./img/esquemas-islamico/doble-arqueria.jpg",
+  "./img/esquemas-islamico/dos-hermanas.jpg",
+  "./img/esquemas-islamico/embajadores.jpg",
+  "./img/esquemas-islamico/mezquita.jpg",
+  "./img/esquemas-islamico/mihrab-aljaferia.jpg",
+  "./img/esquemas-islamico/mihrab-cordoba.jpg",
+  "./img/esquemas-islamico/planta-alhambra.jpg",
+  "./img/esquemas-islamico/planta-aljaferia.jpg",
+  "./img/esquemas-islamico/planta-cordoba.jpg",
+  "./img/esquemas-islamico/planta-nazaries.jpg",
+  "./img/esquemas-islamico/salon-dorado.jpg",
+  "./img/islamico/alhambra.jpg",
+  "./img/islamico/aljaferia.jpg",
+  "./img/islamico/giralda.jpg",
+  "./img/islamico/mezquita-cordoba.jpg",
+  "./img/islamico/santa-sofia.jpg",
+  "./img/islamico/torre-san-martin.jpg",
 ];
 
 self.addEventListener("install", (e) => {
